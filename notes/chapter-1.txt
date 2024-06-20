@@ -1,0 +1,33 @@
+1. What is CDN?
+2. What is crossorigin?
+
+Notes:
+
+1. React.createElement returns an object.
+2. props are children and the attributes that we pass in React.createElement.
+3. root.render() method is the linchpin between React and the browser's DOM. It takes a React element, transforms it into a DOM element, and injects it into the actual HTML DOM..
+4. React works only on the root that is fetched through document.getElementbyId. Other HTML tags in the index.html displays as it is. If there is any HTML inside the root that React is pointing to, it will be replaced by the content that is rendered.
+5. Difference between library and framwork.
+React is a JavaScript library that focuses on building user interface, whereas framwork contains all the components required to build full fledge application.
+React can be applied only to a portion of an existing application.
+
+
+Hey guys! I am planning to post information about ReactJS on day to day basis which can help other React engineers to know about the concepts which they might/ might not know.
+
+Its better to share knowledge rather than keeping it within ourselves, right?
+
+Starting with basics is always better.
+
+
+React can be imported in two ways:
+
+1. Through CDN link: which is content delivery network that hosts applications , which can be fetched and used in our application.
+
+2. Installing the dependencies locally and using it.
+
+
+React needs root element under which all the other elements can be structured under.
+
+
+React can be either be written using React.createElement that returns an Javascript object which in turn is transformed to HTML using the render function or
+it can be written using JSX which is syntactic sugar instead of writing in a complex way
