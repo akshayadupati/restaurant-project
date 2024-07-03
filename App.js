@@ -1,3 +1,7 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+
 // const heading = React.createElement(
 //   "h1",
 //   { id: "heading", className: "my-class", style: {
@@ -16,10 +20,10 @@
 
 const parent = React.createElement(
     'ul',
-    { key: 'listKey' }, // Specify the key prop here
-    React.createElement('li', { key: 'item1' }, 'Item 1'),
-    React.createElement('li', { key: 'item2' }, 'Item 2'),
-    React.createElement('li', { key: 'item3' }, 'Item 3')
+    {}, // Specify the key prop here
+    React.createElement('li', { key: 'item1' }, 'Item One'),
+    React.createElement('li', { key: 'item2' }, 'Item Two'),
+    React.createElement('li', { key: 'item3' }, 'Item Three')
   );
   
   //ReactDOM.render(element, document.getElementById('root'));
