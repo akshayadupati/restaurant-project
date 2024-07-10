@@ -26,8 +26,17 @@
   font-size: 20px;
 }
 
-.search-container {
+.filter-container {
   margin: 10px;
+}
+
+.filter-btn {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border: none;
+  margin-left: 10px;
 }
 
 .restaurant-container {
