@@ -1,33 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
-import { RESTAURANT_DATA } from "../utils/mockData.js";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState(RESTAURANT_DATA);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
-  return (
-    <div className="body-container">
-      <div className="filter-container">
-        <button
-          className="filter-btn"
-          onClick={() => {
-            setListOfRestaurants(
-              listOfRestaurants.filter(
-                (restaurant) => restaurant.info.avgRating > 4.2
-              )
-            );
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+  useEffect(async () => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+
+    const results = await data.json();
+    setListOfRestaurants(
+      results?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+  };
+
+  console.log(listOfRestaurants);
+
+  if (listOfRestaurants.length === 0) {
+    return <Shimmer />;
+  } else
+    return (
+      <div className="body-container">
+        <div className="filter-container">
+          <button
+            className="filter-btn"
+            onClick={() => {
+              setListOfRestaurants(
+                listOfRestaurants.filter(
+                  (restaurant) => restaurant.info.avgRating > 4.2
+                )
+              );
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
+        <div className="restaurant-container">
+          {listOfRestaurants.map((restaurant) => (
+            <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
+          ))}
+        </div>
       </div>
-      <div className="restaurant-container">
-        {listOfRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
-        ))}
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Body;
