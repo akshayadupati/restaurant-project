@@ -4,7 +4,6 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
-
   useEffect(async () => {
     fetchData();
   }, []);
@@ -27,6 +26,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body-container">
+      {console.log("renderrr bodyy")}
       <div className="filter-container">
         <button
           className="filter-btn"
