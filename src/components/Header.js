@@ -5,6 +5,7 @@ const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   return (
     <div className="header-container">
+      {console.log("rendering")}
       <div className="logo-container">
         <img className="logo-img" src={LOGO_URL}></img>
       </div>
@@ -17,7 +18,7 @@ const Header = () => {
           <button
             className="login-btn"
             onClick={() => {
-              setBtnName("Logout");
+              btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
             }}
           >
             {btnName}
