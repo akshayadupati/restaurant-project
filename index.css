@@ -28,6 +28,12 @@
 
 .filter-container {
   margin: 10px;
+  display: flex;
+  margin-left: 25px;
+}
+
+.search-input {
+  padding: 5px;
 }
 
 .filter-btn {
