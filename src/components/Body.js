@@ -23,32 +23,31 @@ const Body = () => {
 
   console.log(listOfRestaurants);
 
-  if (listOfRestaurants.length === 0) {
-    return <Shimmer />;
-  } else
-    return (
-      <div className="body-container">
-        <div className="filter-container">
-          <button
-            className="filter-btn"
-            onClick={() => {
-              setListOfRestaurants(
-                listOfRestaurants.filter(
-                  (restaurant) => restaurant.info.avgRating > 4.2
-                )
-              );
-            }}
-          >
-            Top Rated Restaurants
-          </button>
-        </div>
-        <div className="restaurant-container">
-          {listOfRestaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
-          ))}
-        </div>
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
+    <div className="body-container">
+      <div className="filter-container">
+        <button
+          className="filter-btn"
+          onClick={() => {
+            setListOfRestaurants(
+              listOfRestaurants.filter(
+                (restaurant) => restaurant.info.avgRating > 4.4
+              )
+            );
+          }}
+        >
+          Top Rated Restaurants
+        </button>
       </div>
-    );
+      <div className="restaurant-container">
+        {listOfRestaurants.map((restaurant) => (
+          <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Body;
