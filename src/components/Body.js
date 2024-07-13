@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SWIGGY_URL } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -9,6 +10,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
+    console.log("useEffect Bodyyy rendered");
     fetchData();
   }, []);
 
@@ -25,7 +27,7 @@ const Body = () => {
         ?.restaurants
     );
   };
-
+  console.log("Bodyyy rendered", listOfRestaurants);
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -70,7 +72,9 @@ const Body = () => {
       </div>
       <div className="restaurant-container">
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
+          <Link key={restaurant.info.id} to={`/restaurant/${restaurant.info.id}`}>
+            <RestaurantCard restaurant={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
