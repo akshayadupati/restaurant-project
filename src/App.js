@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
+//import Grocery from "./components/Grocery";
+
+const Grocery = lazy(() => import("./components/Grocery"));
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
+import { ThemeContextProviderr } from "./Pagination-Interview Prep/ThemeContextt";
+import Shimmer from "./components/Shimmer";
 
 const App = () => {
   return (
     <div className="app-container">
-      <Header />
-      <Outlet />
+      <ThemeContextProviderr>
+        <Header />
+        <Outlet />
+      </ThemeContextProviderr>
     </div>
   );
 };
@@ -35,6 +42,14 @@ const routerConfiguration = createBrowserRouter([
       {
         path: `/restaurant/:id`,
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Grocery />
+          </Suspense>
+        ),
       },
     ],
   },

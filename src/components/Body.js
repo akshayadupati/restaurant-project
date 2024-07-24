@@ -3,6 +3,7 @@ import { SWIGGY_URL } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/hooks/useOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -10,7 +11,6 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    console.log("useEffect Bodyyy rendered");
     fetchData();
   }, []);
 
@@ -27,7 +27,13 @@ const Body = () => {
         ?.restaurants
     );
   };
-  console.log("Bodyyy rendered", listOfRestaurants);
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false)
+    return (
+      <h1>Your internet seems to be disconnected. Please try again later...</h1>
+    );
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -72,7 +78,11 @@ const Body = () => {
       </div>
       <div className="restaurant-container">
         {filteredRestaurants.map((restaurant) => (
-          <Link key={restaurant.info.id} to={`/restaurant/${restaurant.info.id}`}>
+          <Link
+            key={restaurant.info.id}
+            to={`/restaurant/${restaurant.info.id}`}
+            className="custom-link"
+          >
             <RestaurantCard restaurant={restaurant} />
           </Link>
         ))}
