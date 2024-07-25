@@ -10,29 +10,28 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
   const { theme, setTheme } = useContext(themeContextt);
   return (
-    <div className={"header-container"}>
-      {console.log("Header", theme)}
+    <div className="flex justify-between items-center bg-purple-100 shadow-lg m-2">
       <div className="logo-container">
-        <img className="logo-img" src={LOGO_URL}></img>
+        <img className="w-40 h-32" src={LOGO_URL}></img>
       </div>
       <div className="nav-items-container">
-        <ul className="nav-items-list">
-          <li className="nav-item">
-            Online Status: {onlineStatus === true ? "Online" : "Offline"}
+        <ul className="flex m-4">
+          <li className="px-2">
+            Online Status: {onlineStatus === true ? <>&#x2713;</> : <>&#x2715;</>}
           </li>
-          <li className="nav-item">
+          <li className="px-2">
             <Link to="/">Home</Link>
           </li>
-          <li className="nav-item">
+          <li className="px-2">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li className="nav-item">
+          <li className="px-2">
             <Link to="/about">About Us</Link>
           </li>
-          <li className="nav-item">
+          <li className="px-2">
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li className="nav-item">
+          <li className="px-2">
             <Link to="cart">Cart</Link>
           </li>
           <button
