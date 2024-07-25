@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SWIGGY_URL } from "../utils/constants";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withRestaurantOpen } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
@@ -10,6 +10,7 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  console.log(listOfRestaurants);
   useEffect(() => {
     fetchData();
   }, []);
@@ -29,6 +30,7 @@ const Body = () => {
   };
 
   const onlineStatus = useOnlineStatus();
+  const RestaurantIsOpen = withRestaurantOpen(RestaurantCard);
 
   if (onlineStatus === false)
     return (
@@ -84,7 +86,11 @@ const Body = () => {
               to={`/restaurant/${restaurant.info.id}`}
               className="custom-link"
             >
-              <RestaurantCard restaurant={restaurant} />
+              {restaurant.info.isOpen ? (
+                <RestaurantIsOpen restaurant={restaurant} />
+              ) : (
+                <RestaurantCard restaurant={restaurant} />
+              )}
             </Link>
           </div>
         ))}
